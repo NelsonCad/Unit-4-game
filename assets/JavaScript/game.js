@@ -1,10 +1,14 @@
 $(document).ready(function () {
 
-    let totalScore = 0;
+    let totalScore = 0; //user Score
+    let endScore = Math.floor((Math.random() * 100) + 20);
 
-    let endScore = Math.floor((Math.random() * 1000) + 500);
+    let Wins = 0;
+    let Losses = 0;
 
-    $("#targetScore").append(endScore); // Generates the target score for the user
+    $("#wins").text(Wins);
+    $("#losses").text(Losses);
+    $("#targetScore").text(endScore); // Generates the target score for the user
 
     //created array to spawn buttons from
     var betaKids = ["john", "jade", "dave", "rose"];
@@ -14,7 +18,7 @@ $(document).ready(function () {
         //creates a button for each kid
         let userBtn = $("<button>");
 
-        let random = Math.floor((Math.random() * 100) + 1);
+        let random = Math.floor((Math.random() * 10) + 1);
 
         value = random;
         //adds classes to each button created
@@ -39,10 +43,44 @@ $(document).ready(function () {
     $(".kid-button").on("click", function () {
 
         totalScore += $(this).data("value");
-        console.log(totalScore);
+        
         $("#userScore").text(totalScore);
 
-    })
+        if (totalScore < endScore) {
+
+            return;
+
+        } else if (totalScore === endScore) {
+            console.log("you won!");
+            Wins++;
+            endScore = 0;
+            endScore = Math.floor((Math.random() * 100) + 20);
+            totalScore = 0;
+
+            $(".kid-button").data("value", Math.floor((Math.random() * 10) + 1));
+
+            $("#wins").text(Wins);
+            $("#losses").text(Losses);
+            $("#targetScore").text(endScore);
+            $("#userScore").text(totalScore);
+
+        } else {
+            console.log("you lost!");
+            Losses++;
+            endScore = 0;
+            endScore = Math.floor((Math.random() * 1000) + 500);
+            totalScore = 0;
+
+            $(".kid-button").data("value", Math.floor((Math.random() * 10) + 1));
+
+            $("#wins").text(Wins);
+            $("#losses").text(Losses);
+            $("#targetScore").text(endScore);
+            $("#userScore").text(totalScore);
+        }
+
+
+    });
 
 
 
