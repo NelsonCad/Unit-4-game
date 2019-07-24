@@ -19,7 +19,7 @@ const betaPics = ["assets/images/Jhon.PNG", "assets/images/Jaed.PNG", "assets/im
 betaKids.forEach(function (kid) {
     //creates a button for each kid
     let userBtn = $("<button>");
-    
+
     let random = Math.floor((Math.random() * 10) + 1);
 
     value = random;
@@ -36,7 +36,7 @@ betaKids.forEach(function (kid) {
 
     //adds all above data to the next open slot for a button
     $("#boxen").append(userBtn);
-    $("#boxen").append("<img src=" + betaPics[i]+ " width='125px'>");
+    $("#boxen").append("<img src=" + betaPics[i] + " width='125px'>");
     $("#boxen").append("<br>");
 
     i++;
@@ -67,9 +67,10 @@ $(".kid-button").on("click", function () {
         $("#targetScore").text(endScore);
         $("#userScore").text(totalScore);
 
-        $(".kid-button").each(function () {
-            $(this).attr("data-value", Math.floor((Math.random() * 10) + 1));
-        })
+        $("button").each(function () {
+            let value = Math.floor((Math.random() * 10) + 1);
+            $(this).attr("data-value", value);
+        });
 
 
     } else {
@@ -79,15 +80,15 @@ $(".kid-button").on("click", function () {
         endScore = Math.floor((Math.random() * 100) + 20);
         totalScore = 0;
 
-        $(".kid-button").each(function () {
-            $(this).attr("data-value", Math.floor((Math.random() * 10) + 1));
-        })
-
         $("#wins").text(Wins);
         $("#losses").text(Losses);
         $("#targetScore").text(endScore);
         $("#userScore").text(totalScore);
 
+        $(".kid-button").each(function () {
+            let value = Math.floor((Math.random() * 10) + 1);
+            $(this).attr("data-value", value);
+        });
 
     };
 
