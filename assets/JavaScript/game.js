@@ -14,38 +14,38 @@ $("#targetScore").text(endScore); // Generates the target score for the user
 const betaKids = ["john", "jade", "dave", "rose"];
 const betaPics = ["assets/images/Jhon.PNG", "assets/images/Jaed.PNG", "assets/images/Daev.PNG", "assets/images/Rozz.PNG"];
 
+function betaButtons() {
+
+    betaKids.forEach(function (kid) {
+        //creates a button for each kid
+        let userBtn = $("<button>");
+
+        let random = Math.floor((Math.random() * 10) + 1);
+
+        value = random;
+        //adds classes to each button created
+        userBtn.addClass("kid-button kid kid-button-color");
+
+        //adds the data of the kid to each button generated
+        userBtn.attr("data-letter", kid);
+        userBtn.attr("data-value", value);
 
 
-betaKids.forEach(function (kid) {
-    //creates a button for each kid
-    let userBtn = $("<button>");
+        //adds the name of the kid to the front of the button generated
+        userBtn.text(kid);
 
-    let random = Math.floor((Math.random() * 10) + 1);
+        //adds all above data to the next open slot for a button
+        $("#boxen").append(userBtn);
 
-    value = random;
-    //adds classes to each button created
-    userBtn.addClass("kid-button kid kid-button-color");
+        $("#boxen").append("<br>");
 
-    //adds the data of the kid to each button generated
-    userBtn.attr("data-letter", kid);
-    userBtn.attr("data-value", value);
+        i++;
+    });
 
+}
+betaButtons()
 
-    //adds the name of the kid to the front of the button generated
-    userBtn.text(kid);
-
-    //adds all above data to the next open slot for a button
-    $("#boxen").append(userBtn);
-    $("#boxen").append("<img src=" + betaPics[i] + " width='125px'>");
-    $("#boxen").append("<br>");
-
-    i++;
-});
-
-
-
-
-$(".kid-button").on("click", function () {
+$(document).on("click", ".kid-button", function (scores) {
 
     totalScore += $(this).data("value");
 
@@ -67,10 +67,10 @@ $(".kid-button").on("click", function () {
         $("#targetScore").text(endScore);
         $("#userScore").text(totalScore);
 
-        $("button").each(function () {
-            let value = Math.floor((Math.random() * 10) + 1);
-            $(this).attr("data-value", value);
-        });
+        $("#boxen").empty();
+        betaButtons();
+
+        return scores;
 
 
     } else {
@@ -85,11 +85,10 @@ $(".kid-button").on("click", function () {
         $("#targetScore").text(endScore);
         $("#userScore").text(totalScore);
 
-        $(".kid-button").each(function () {
-            let value = Math.floor((Math.random() * 10) + 1);
-            $(this).attr("data-value", value);
-        });
+        $("#boxen").empty();
+        betaButtons();
 
+        return scores;
     };
 
 });
